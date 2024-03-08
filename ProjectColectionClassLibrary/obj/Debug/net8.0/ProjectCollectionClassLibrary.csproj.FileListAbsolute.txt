@@ -1,0 +1,12 @@
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\bin\Debug\net8.0\ProjectCollectionClassLibrary.deps.json
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\bin\Debug\net8.0\ProjectCollectionClassLibrary.dll
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\bin\Debug\net8.0\ProjectCollectionClassLibrary.pdb
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.AssemblyInfoInputs.cache
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.AssemblyInfo.cs
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.sourcelink.json
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.dll
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\refint\ProjectCollectionClassLibrary.dll
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.pdb
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionClassLibrary\obj\Debug\net8.0\ref\ProjectCollectionClassLibrary.dll

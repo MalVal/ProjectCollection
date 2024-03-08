@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "ProjectCollectionWpfApp/1.0.0": {
+        "dependencies": {
+          "ProjectCollectionClassLibrary": "1.0.0"
+        },
         "runtime": {
           "ProjectCollectionWpfApp.dll": {}
+        }
+      },
+      "ProjectCollectionClassLibrary/1.0.0": {
+        "runtime": {
+          "ProjectCollectionClassLibrary.dll": {}
         }
       }
     }
   },
   "libraries": {
     "ProjectCollectionWpfApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ProjectCollectionClassLibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
