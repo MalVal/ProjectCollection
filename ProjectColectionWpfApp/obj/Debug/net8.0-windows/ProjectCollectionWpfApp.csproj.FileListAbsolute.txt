@@ -23,3 +23,5 @@ C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpf
 C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpfApp\bin\Debug\net8.0-windows\ProjectCollectionClassLibrary.pdb
 C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpfApp\obj\Debug\net8.0-windows\ProjectCollectionWpfApp.csproj.AssemblyReference.cache
 C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpfApp\obj\Debug\net8.0-windows\ProjectCollectionWpfApp.csproj.CopyComplete
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpfApp\obj\Debug\net8.0-windows\WindowCreateElement.g.cs
+C:\Users\ironv\Documents\HEPL\B2\c#\ProjectColectionSolution\ProjectColectionWpfApp\obj\Debug\net8.0-windows\WindowCreateElement.baml

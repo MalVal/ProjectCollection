@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using System.Reflection.Emit;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,7 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using ProjectCollectionClassLibrary;
+using ProjectCollectionWpfApp;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ProjectColectionWpfApp
@@ -18,167 +23,65 @@ namespace ProjectColectionWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Element> _listElem;
-
-        public List<Element> ListElem
-        {
-            get { return _listElem; }
-            set { _listElem = value; }
-        }
+        private DataList DataList { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            ListElem = new List<Element>();
+            DataList = new DataList();
+            DataContext = DataList;
         }
 
-        private void BtnCreateComics_Click(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool error = false;
-            string? name, isbn, autor, topic;
-            float price;
-            DateTime? date = null;
-
-            name = ComName.Text;
-            if(string.IsNullOrWhiteSpace(name))
+            var result = MessageBox.Show("Voullez-vous quitter?", "Quitter?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
             {
-                name = null;
-            }
-            
-            if(string.IsNullOrWhiteSpace(ComPrice.Text))
-            {
-                price = 0;
-            }
-            else
-            {
-                if (!float.TryParse(ComPrice.Text, out price))
-                {
-                    error = true;
-                }
-            }
-
-            if(string.IsNullOrWhiteSpace(ComDate.Text))
-            {
-                date = null;
-            }
-            else
-            {
-                DateTime parsedDate;
-                if (!DateTime.TryParse(ComDate.Text, out parsedDate))
-                {
-                    error = true;
-                }
-                else
-                {
-                    date = parsedDate;
-                }
-            }
-
-            isbn = ComIsbn.Text;
-            if (string.IsNullOrWhiteSpace(isbn))
-            {
-                isbn = null;
-            }
-
-            autor = ComName.Text;
-            if (string.IsNullOrWhiteSpace(autor))
-            {
-                autor = null;
-            }
-
-            topic = ComName.Text;
-            if (string.IsNullOrWhiteSpace(topic))
-            {
-                topic = null;
-            }
-
-            if (error == false)
-            {
-                Comics newComics = new(name, price, date, isbn, autor, topic);
-                ListElem.Add(newComics);
-                ComError.Content = "The comic book was saved successfull !";
-            }
-            else
-            {
-                ComError.Content = "The comic book was not saved because some fields are invalid !";
+                e.Cancel = true;
             }
         }
 
-        private void BtnCreateVinyl_Click(object sender, RoutedEventArgs e)
+        #region Event functions
+        private void WindowCreateElement_ComicsCreated(object sender, ComicsCreatedEventArgs e)
         {
-            bool error = false;
-            string? name, genre, label, country, composer;
-            float price;
-            DateTime? date = null;
+            Comics newComics = new Comics(e.ComicBook.Name, e.ComicBook.Price, e.ComicBook.Date, e.ComicBook.Isbn, e.ComicBook.Autor, e.ComicBook.Topic);
+            DataList.ComicsList.Add(newComics);
+        }
 
-            name = VinName.Text;
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                name = null;
-            }
+        private void WindowCreateElement_VinylCreated(object sender, VinylCreatedEventArgs e)
+        {
+            Vinyl newVinyl = new Vinyl(e.Vinyl.Name, e.Vinyl.Price, e.Vinyl.Date, e.Vinyl.Genre, e.Vinyl.Label, e.Vinyl.Country, e.Vinyl.Composer);
+            DataList.VinylList.Add(newVinyl);
+        }
+        #endregion
 
-            if (string.IsNullOrWhiteSpace(VinPrice.Text))
+        private void BtnCreateElement_Click(object sender, RoutedEventArgs e)
+        {
+            WindowCreateElement windowCreateElement = new WindowCreateElement();
+
+            windowCreateElement.ComicsCreated += WindowCreateElement_ComicsCreated;
+            windowCreateElement.VinylCreated += WindowCreateElement_VinylCreated;
+
+            windowCreateElement.ShowDialog();
+        }
+
+        private void RadioButtonElement_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioButtonElement = sender as RadioButton;
+
+            if (radioButtonElement.IsChecked == true)
             {
-                price = 0;
-            }
-            else
-            {
-                if (!float.TryParse(VinPrice.Text, out price))
+                string optionChoisie = radioButtonElement.Content.ToString();
+                if(optionChoisie == "Vinyls")
                 {
-                    error = true;
+                    dataGrid.ItemsSource = DataList.VinylList;
+                    dataGrid.SelectedItem = DataList.CurrentVinyl;
                 }
-            }
-
-            if (string.IsNullOrWhiteSpace(VinDate.Text))
-            {
-                date = null;
-            }
-            else
-            {
-                DateTime parsedDate;
-                if (!DateTime.TryParse(VinDate.Text, out parsedDate))
-                {
-                    error = true;
+                else if(optionChoisie == "Comics")
+                { 
+                    dataGrid.ItemsSource = DataList.ComicsList;
+                    dataGrid.SelectedItem = DataList.CurrentComics;
                 }
-                else
-                {
-                    date = parsedDate;
-                }
-            }
-
-            genre = VinGenre.Text;
-            if (string.IsNullOrWhiteSpace(genre))
-            {
-                genre = null;
-            }
-
-            label = VinLabel.Text;
-            if (string.IsNullOrWhiteSpace(label))
-            {
-                label = null;
-            }
-
-            country = VinCountry.Text;
-            if (string.IsNullOrWhiteSpace(country))
-            {
-                country = null;
-            }
-
-            composer = VinComposer.Text;
-            if (string.IsNullOrWhiteSpace(composer))
-            {
-                composer = null;
-            }
-
-            if (error == false)
-            {
-                Vinyl newComics = new(name, price, date, genre, label, country, composer);
-                ListElem.Add(newComics);
-                VinError.Content = "The vinyl was saved successfull !";
-            }
-            else
-            {
-                VinError.Content = "The vinyl was not saved because some fields are invalid !";
             }
         }
     }
