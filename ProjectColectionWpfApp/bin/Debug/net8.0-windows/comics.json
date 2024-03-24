@@ -1,0 +1,16 @@
+{
+  "$id": "1",
+  "$values": [
+    {
+      "$id": "2",
+      "Isbn": null,
+      "Autor": null,
+      "Topic": "Star Wars",
+      "Id": 1,
+      "Name": "Legacy",
+      "DateAdded": "2024-03-24T14:30:43.4750918+01:00",
+      "Price": 800,
+      "Date": "2008-12-12T00:00:00"
+    }
+  ]
+}

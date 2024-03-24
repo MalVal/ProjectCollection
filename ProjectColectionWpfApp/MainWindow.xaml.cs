@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,6 +18,9 @@ using System.Xml.Linq;
 using ProjectCollectionClassLibrary;
 using ProjectCollectionWpfApp;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.IO;
+using System;
+using System.Collections.ObjectModel;
 
 namespace ProjectColectionWpfApp
 {
@@ -30,14 +36,23 @@ namespace ProjectColectionWpfApp
             InitializeComponent();
             DataList = new DataList();
             DataContext = DataList;
+
+            if (File.Exists(".\\comics.json") && File.Exists(".\\vinyls.json"))
+            {
+                Load();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = MessageBox.Show("Voullez-vous quitter?", "Quitter?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.No)
+            var result = MessageBox.Show("Voulez-vous sauvegarder?", "Quitter?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
+            }
+            else if (result == MessageBoxResult.Yes)
+            {
+                Save();
             }
         }
 
@@ -72,17 +87,41 @@ namespace ProjectColectionWpfApp
             if (radioButtonElement.IsChecked == true)
             {
                 string optionChoisie = radioButtonElement.Content.ToString();
-                if(optionChoisie == "Vinyls")
+                if (optionChoisie == "Vinyls")
                 {
                     dataGrid.ItemsSource = DataList.VinylList;
                     dataGrid.SelectedItem = DataList.CurrentVinyl;
                 }
-                else if(optionChoisie == "Comics")
-                { 
+                else if (optionChoisie == "Comics")
+                {
                     dataGrid.ItemsSource = DataList.ComicsList;
                     dataGrid.SelectedItem = DataList.CurrentComics;
                 }
             }
+        }
+
+        private void Save()
+        {
+            JsonSerializerOptions options = new()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
+
+            File.WriteAllText(".\\comics.json", JsonSerializer.Serialize(DataList.ComicsList, options));
+            File.WriteAllText(".\\vinyls.json", JsonSerializer.Serialize(DataList.VinylList, options));
+        }
+
+        private void Load()
+        {
+            JsonSerializerOptions options = new()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
+
+            DataList.ComicsList = JsonSerializer.Deserialize<ObservableCollection<Comics>>(File.ReadAllText(".\\comics.json"), options)!;
+            DataList.VinylList = JsonSerializer.Deserialize<ObservableCollection<Vinyl>>(File.ReadAllText(".\\vinyls.json"), options)!;
         }
     }
 }

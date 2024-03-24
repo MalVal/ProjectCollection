@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj",
       "projectName": "ProjectCollectionClassLibrary",
-      "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj",
+      "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj",
       "packagesPath": "C:\\Users\\ironv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionClassLibrary\\obj\\",
+      "outputPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ironv\\AppData\\Roaming\\NuGet\\NuGet.Config",

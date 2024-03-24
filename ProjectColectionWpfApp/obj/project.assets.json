@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionWpfApp\\ProjectCollectionWpfApp.csproj",
+      "projectUniqueName": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionWpfApp\\ProjectCollectionWpfApp.csproj",
       "projectName": "ProjectCollectionWpfApp",
-      "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionWpfApp\\ProjectCollectionWpfApp.csproj",
+      "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionWpfApp\\ProjectCollectionWpfApp.csproj",
       "packagesPath": "C:\\Users\\ironv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionWpfApp\\obj\\",
+      "outputPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionWpfApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ironv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj": {
-              "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectColectionSolution\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj"
+            "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj": {
+              "projectPath": "C:\\Users\\ironv\\Documents\\HEPL\\B2\\c#\\ProjectCollection\\ProjectColectionClassLibrary\\ProjectCollectionClassLibrary.csproj"
             }
           }
         }
