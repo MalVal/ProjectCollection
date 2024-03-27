@@ -21,6 +21,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.IO;
 using System;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace ProjectColectionWpfApp
 {
@@ -29,7 +30,12 @@ namespace ProjectColectionWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Variables and properties
         private DataList DataList { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         public MainWindow()
         {
@@ -40,6 +46,46 @@ namespace ProjectColectionWpfApp
             if (File.Exists(".\\comics.json") && File.Exists(".\\vinyls.json"))
             {
                 Load();
+            }
+        }
+
+        #endregion
+
+        #region Exterior Event functions
+        private void WindowCreateElement_ComicsCreated(object sender, ComicsCreatedEventArgs e)
+        {
+            Comics newComics = new Comics(e.ComicBook.Name, e.ComicBook.Price, e.ComicBook.Date, e.ComicBook.Image, e.ComicBook.Isbn, e.ComicBook.Autor, e.ComicBook.Topic);
+            DataList.ComicsList.Add(newComics);
+        }
+
+        private void WindowCreateElement_VinylCreated(object sender, VinylCreatedEventArgs e)
+        {
+            Vinyl newVinyl = new Vinyl(e.Vinyl.Name, e.Vinyl.Price, e.Vinyl.Date, e.Vinyl.Image, e.Vinyl.Genre, e.Vinyl.Label, e.Vinyl.Country, e.Vinyl.Composer);
+            DataList.VinylList.Add(newVinyl);
+        }
+        #endregion
+
+        #region Event functions
+
+        private void BtnImageComics_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                if(DataList.CurrentComics != null)
+                    DataList.CurrentComics.Image = openFileDialog.FileName;
+            }
+        }
+
+        private void BtnImageVinyl_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                if (DataList.CurrentVinyl != null)
+                    DataList.CurrentVinyl.Image = openFileDialog.FileName;
             }
         }
 
@@ -55,20 +101,6 @@ namespace ProjectColectionWpfApp
                 Save();
             }
         }
-
-        #region Event functions
-        private void WindowCreateElement_ComicsCreated(object sender, ComicsCreatedEventArgs e)
-        {
-            Comics newComics = new Comics(e.ComicBook.Name, e.ComicBook.Price, e.ComicBook.Date, e.ComicBook.Isbn, e.ComicBook.Autor, e.ComicBook.Topic);
-            DataList.ComicsList.Add(newComics);
-        }
-
-        private void WindowCreateElement_VinylCreated(object sender, VinylCreatedEventArgs e)
-        {
-            Vinyl newVinyl = new Vinyl(e.Vinyl.Name, e.Vinyl.Price, e.Vinyl.Date, e.Vinyl.Genre, e.Vinyl.Label, e.Vinyl.Country, e.Vinyl.Composer);
-            DataList.VinylList.Add(newVinyl);
-        }
-        #endregion
 
         private void BtnCreateElement_Click(object sender, RoutedEventArgs e)
         {
@@ -89,16 +121,44 @@ namespace ProjectColectionWpfApp
                 string optionChoisie = radioButtonElement.Content.ToString();
                 if (optionChoisie == "Vinyls")
                 {
-                    dataGrid.ItemsSource = DataList.VinylList;
-                    dataGrid.SelectedItem = DataList.CurrentVinyl;
+                    dataGridVinyls.Visibility = Visibility.Visible;
+                    GridVinyls.Visibility = Visibility.Visible;
+                    dataGridComics.Visibility = Visibility.Hidden;
+                    GridComics.Visibility = Visibility.Hidden;
                 }
                 else if (optionChoisie == "Comics")
                 {
-                    dataGrid.ItemsSource = DataList.ComicsList;
-                    dataGrid.SelectedItem = DataList.CurrentComics;
+                    dataGridVinyls.Visibility = Visibility.Hidden;
+                    GridVinyls.Visibility = Visibility.Hidden;
+                    dataGridComics.Visibility = Visibility.Visible;
+                    GridComics.Visibility = Visibility.Visible;
                 }
             }
         }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MenuItem_Save_Click(object sender, RoutedEventArgs e)
+        {
+            this.Save();
+        }
+
+        private void MenuItem_ResetComics_Click(object sender, RoutedEventArgs e)
+        {
+            this.DataList.ComicsList.Clear();
+        }
+
+        private void MenuItem_ResetVinyls_Click(object sender, RoutedEventArgs e)
+        {
+            this.DataList.VinylList.Clear();
+        }
+
+        #endregion
+
+        #region Save + Load
 
         private void Save()
         {
@@ -123,5 +183,7 @@ namespace ProjectColectionWpfApp
             DataList.ComicsList = JsonSerializer.Deserialize<ObservableCollection<Comics>>(File.ReadAllText(".\\comics.json"), options)!;
             DataList.VinylList = JsonSerializer.Deserialize<ObservableCollection<Vinyl>>(File.ReadAllText(".\\vinyls.json"), options)!;
         }
+
+        #endregion
     }
 }

@@ -11,9 +11,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Microsoft.Win32;
 using ProjectCollectionClassLibrary;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -49,13 +51,20 @@ namespace ProjectCollectionWpfApp
             if (comboBox.SelectedItem != null)
             {
                 string contenuSelectionne = comboBox.SelectedItem.ToString();
-                if (contenuSelectionne == "Comics")
-                {
 
+                if (contenuSelectionne == "System.Windows.Controls.ComboBoxItem : Comics")
+                {
+                    SPvinyls.Visibility = Visibility.Hidden;
+                    BtnCreateVinyl.Visibility = Visibility.Hidden;
+                    SPcomics.Visibility = Visibility.Visible;
+                    BtnCreateComics.Visibility = Visibility.Visible;
                 }
-                else if(contenuSelectionne == "Vinyls")
+                else if(contenuSelectionne == "System.Windows.Controls.ComboBoxItem : Vinyls")
                 {
-
+                    SPvinyls.Visibility = Visibility.Visible;
+                    BtnCreateVinyl.Visibility = Visibility.Visible;
+                    SPcomics.Visibility = Visibility.Hidden;
+                    BtnCreateComics.Visibility= Visibility.Hidden;
                 }
             }
         }
@@ -67,7 +76,7 @@ namespace ProjectCollectionWpfApp
         private void BtnCreateComics_Click(object sender, RoutedEventArgs e)
         {
             bool error = false;
-            string? name, isbn, autor, topic;
+            string? name, isbn, autor, topic, image;
             float price;
             DateTime? date = null;
 
@@ -89,21 +98,22 @@ namespace ProjectCollectionWpfApp
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(ComDate.Text))
+            if (ComDate.SelectedDate == null)
             {
                 date = null;
             }
             else
             {
-                DateTime parsedDate;
-                if (!DateTime.TryParse(ComDate.Text, out parsedDate))
-                {
-                    error = true;
-                }
-                else
-                {
-                    date = parsedDate;
-                }
+                date = ComDate.SelectedDate;
+            }
+
+            if(ComImage.Source == null)
+            {
+                image = null;
+            }
+            else
+            {
+                image = ComImage.Source.ToString();
             }
 
             isbn = ComIsbn.Text;
@@ -126,7 +136,7 @@ namespace ProjectCollectionWpfApp
 
             if (error == false)
             {
-                ComicsCreated?.Invoke(this, new ComicsCreatedEventArgs(name, price, date, isbn, autor, topic));
+                ComicsCreated?.Invoke(this, new ComicsCreatedEventArgs(name, price, date, image, isbn, autor, topic));
                 ComError.Content = "The comic book was saved successfull !";
             }
             else
@@ -141,7 +151,7 @@ namespace ProjectCollectionWpfApp
         private void BtnCreateVinyl_Click(object sender, RoutedEventArgs e)
         {
             bool error = false;
-            string? name, genre, label, country, composer;
+            string? name, genre, label, country, composer, image;
             float price;
             DateTime? date = null;
 
@@ -163,21 +173,22 @@ namespace ProjectCollectionWpfApp
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(VinDate.Text))
+            if (VinDate.SelectedDate == null)
             {
                 date = null;
             }
             else
             {
-                DateTime parsedDate;
-                if (!DateTime.TryParse(VinDate.Text, out parsedDate))
-                {
-                    error = true;
-                }
-                else
-                {
-                    date = parsedDate;
-                }
+                date = VinDate.SelectedDate;
+            }
+
+            if (VinImage.Source == null)
+            {
+                image = null;
+            }
+            else
+            {
+                image = VinImage.Source.ToString();
             }
 
             genre = VinGenre.Text;
@@ -206,7 +217,7 @@ namespace ProjectCollectionWpfApp
 
             if (error == false)
             {
-                VinylCreated?.Invoke(this, new VinylCreatedEventArgs(name, price, date, genre, label, country, composer));
+                VinylCreated?.Invoke(this, new VinylCreatedEventArgs(name, price, date, image, genre, label, country, composer));
                 VinError.Content = "The vinyl was saved successfull !";
             }
             else
@@ -214,15 +225,38 @@ namespace ProjectCollectionWpfApp
                 VinError.Content = "The vinyl was not saved because some fields are invalid !";
             }
         }
+
+        private void BtnImageVinyl_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string imagePath = openFileDialog.FileName;
+                VinImage.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
+
+        private void BtnImageComics_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string imagePath = openFileDialog.FileName;
+                ComImage.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
+
         #endregion
     }
     public class ComicsCreatedEventArgs : EventArgs
     {
         public Comics ComicBook { get; set; }
 
-        public ComicsCreatedEventArgs(string? name, float price, DateTime? date, string? isbn, string? autor, string? topic)
+        public ComicsCreatedEventArgs(string? name, float price, DateTime? date, string? image, string? isbn, string? autor, string? topic)
         {
-            ComicBook = new Comics(name, price, date, isbn, autor, topic);
+            ComicBook = new Comics(name, price, date, image, isbn, autor, topic);
         }
     }
 
@@ -230,9 +264,9 @@ namespace ProjectCollectionWpfApp
     {
         public Vinyl Vinyl { get; set; }
 
-        public VinylCreatedEventArgs(string? name, float price, DateTime? date, string? genre, string? label, string? country, string? composer)
+        public VinylCreatedEventArgs(string? name, float price, DateTime? date, string? image, string? genre, string? label, string? country, string? composer)
         {
-            Vinyl = new Vinyl(name, price, date, genre, label, country, composer);
+            Vinyl = new Vinyl(name, price, date, image, genre, label, country, composer);
         }
     }
 

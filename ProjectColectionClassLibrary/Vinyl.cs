@@ -46,7 +46,7 @@ namespace ProjectCollectionClassLibrary
 
         #region Constructors
 
-        public Vinyl(String? name, float price, DateTime? date, String? genre, String? label, String? country, String? composer) : base(name, price, date)
+        public Vinyl(String? name, float price, DateTime? date, String?image, String? genre, String? label, String? country, String? composer) : base(name, price, date, image)
         {
             Genre = genre;
             Label = label;
@@ -54,74 +54,8 @@ namespace ProjectCollectionClassLibrary
             Composer = composer;
         }
 
-        public Vinyl() : this(null, 0, null, null, null, null, null)
+        public Vinyl() : this(null, 0, null, null, null, null, null, null)
         {
-        }
-
-        #endregion
-
-        #region Methods
-
-        public override void Save(BinaryWriter bw)
-        {
-            base.Save(bw);
-            if (Genre != null)
-            {
-                bw.Write(Genre);
-            }
-            else
-            {
-                bw.Write("");
-            }
-            if (Label != null)
-            {
-                bw.Write(Label);
-            }
-            else
-            {
-                bw.Write("");
-            }
-            if (Country != null)
-            {
-                bw.Write(Country);
-            }
-            else
-            {
-                bw.Write("");
-            }
-            if (Composer != null)
-            {
-                bw.Write(Composer);
-            }
-            else
-            {
-                bw.Write("");
-            }
-        }
-
-        public override void Load(BinaryReader br)
-        {
-            base.Load(br);
-            Genre = br.ReadString();
-            if (Genre == "")
-            {
-                Genre = null;
-            }
-            Label = br.ReadString();
-            if (Label == "")
-            {
-                Label = null;
-            }
-            Country = br.ReadString();
-            if (Country == "")
-            {
-                Country = null;
-            }
-            Composer = br.ReadString();
-            if (Composer == "")
-            {
-                Composer = null;
-            }
         }
 
         #endregion

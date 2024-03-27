@@ -7,11 +7,23 @@
       "Label": "EMI",
       "Country": "UK",
       "Composer": "Queen",
-      "Id": 3,
       "Name": "A Night At The Opera",
-      "DateAdded": "2024-03-24T14:31:18.63234+01:00",
-      "Price": 3499,
-      "Date": "1975-12-12T00:00:00"
+      "DateAdded": "2024-03-27T16:20:17.7227658+01:00",
+      "Price": 34.99,
+      "Date": "1975-12-01T00:00:00",
+      "Image": "C:\\Users\\ironv\\OneDrive\\Images\\Saved Pictures\\0_p31sXcGBPlVNYps8.png"
+    },
+    {
+      "$id": "3",
+      "Genre": "Rock",
+      "Label": "Elektra",
+      "Country": "Belgium",
+      "Composer": "Queen",
+      "Name": "A Day At The Race",
+      "DateAdded": "2024-03-27T17:21:11.8263073+01:00",
+      "Price": 14.78,
+      "Date": "1976-02-13T00:00:00",
+      "Image": "C:\\Users\\ironv\\OneDrive\\Images\\Saved Pictures\\Interface_Message_Processor_Front_Panel.jpg"
     }
   ]
 }

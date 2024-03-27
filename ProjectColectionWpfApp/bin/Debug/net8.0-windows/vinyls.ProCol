@@ -1,0 +1,49 @@
+{
+  "$id": "1",
+  "$values": [
+    {
+      "$id": "2",
+      "Genre": null,
+      "Label": null,
+      "Country": null,
+      "Composer": null,
+      "Name": null,
+      "DateAdded": "2024-03-25T14:58:37.5893267+01:00",
+      "Price": 0,
+      "Date": null
+    },
+    {
+      "$id": "3",
+      "Genre": null,
+      "Label": null,
+      "Country": null,
+      "Composer": null,
+      "Name": null,
+      "DateAdded": "2024-03-25T14:58:37.7471735+01:00",
+      "Price": 0,
+      "Date": null
+    },
+    {
+      "$id": "4",
+      "Genre": null,
+      "Label": null,
+      "Country": null,
+      "Composer": null,
+      "Name": null,
+      "DateAdded": "2024-03-25T14:58:37.9392114+01:00",
+      "Price": 0,
+      "Date": null
+    },
+    {
+      "$id": "5",
+      "Genre": null,
+      "Label": null,
+      "Country": null,
+      "Composer": null,
+      "Name": null,
+      "DateAdded": "2024-03-25T14:58:38.0911339+01:00",
+      "Price": 0,
+      "Date": null
+    }
+  ]
+}

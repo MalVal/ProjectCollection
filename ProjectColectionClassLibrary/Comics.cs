@@ -38,68 +38,15 @@ namespace ProjectCollectionClassLibrary
 
         #region Constructors
 
-        public Comics(String? name, float price, DateTime? date, String? isbn, String? autor, String? topic) : base(name, price, date)
+        public Comics(String? name, float price, DateTime? date, String? image, String? isbn, String? autor, String? topic) : base(name, price, date, image)
         {
             Isbn = isbn;
             Autor = autor;
             Topic = topic;
         }
 
-        public Comics() : this(null, 0, null, null, null, null)
+        public Comics() : this(null, 0, null, null, null, null, null)
         {
-        }
-
-        #endregion
-
-        #region Methods
-
-        public override void Save(BinaryWriter bw)
-        {
-            base.Save(bw);
-            if(Isbn != null)
-            {
-                bw.Write(Isbn);
-            }
-            else
-            {
-                bw.Write("");
-            }
-            if (Autor != null)
-            {
-                bw.Write(Autor);
-            }
-            else
-            {
-                bw.Write("");
-            }
-            if (Topic != null)
-            {
-                bw.Write(Topic);
-            }
-            else
-            {
-                bw.Write("");
-            }
-        }
-
-        public override void Load(BinaryReader br)
-        {
-            base.Load(br);
-            Isbn = br.ReadString();
-            if (Isbn == "")
-            {
-                Isbn = null;
-            }
-            Autor = br.ReadString();
-            if (Autor == "")
-            {
-                Autor = null;
-            }
-            Topic = br.ReadString();
-            if (Topic == "")
-            {
-                Topic = null;
-            }
         }
 
         #endregion

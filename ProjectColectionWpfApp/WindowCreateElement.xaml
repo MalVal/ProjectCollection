@@ -9,8 +9,8 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
         
         <ComboBox x:Name="comboBox" SelectionChanged="comboBox_SelectionChanged" Grid.Row="0">
@@ -18,19 +18,14 @@
             <ComboBoxItem Content="Vinyls"/>
         </ComboBox>
 
-        <Grid Grid.Row="1">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" x:Name="GridAdd">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.Row="0" Background="BurlyWood">
+            <StackPanel Grid.Row="0" Background="BurlyWood" x:Name="SPcomics" Visibility="Hidden">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -59,7 +54,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Date (YYYY-MM-DD) :" Grid.Column="0"></Label>
-                    <TextBox x:Name="ComDate" Grid.Column="1"/>
+                    <DatePicker x:Name="ComDate" Grid.Column="1"/>
                 </Grid>
 
                 <Grid>
@@ -92,11 +87,21 @@
                     <TextBox x:Name="ComTopic" Grid.Column="1"/>
                 </Grid>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="ComImage" Width="100" Height="100"/>
+                    <Button x:Name="BtnImageComics" Content="Importer image" Grid.Column="1" Click="BtnImageComics_Click"/>
+                </Grid>
+
                 <Label x:Name="ComError" Content=""></Label>
 
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="0" Background="Aquamarine">
+            <StackPanel Grid.Row="0" Background="Aquamarine" x:Name="SPvinyls" Visibility="Hidden">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -125,7 +130,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Date (YYYY-MM-DD) :" Grid.Column="0"></Label>
-                    <TextBox x:Name="VinDate" Grid.Column="1"/>
+                    <DatePicker x:Name="VinDate" Grid.Column="1"/>
                 </Grid>
 
                 <Grid>
@@ -168,12 +173,22 @@
                     <TextBox x:Name="VinComposer" Grid.Column="1"/>
                 </Grid>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="VinImage" Width="100" Height="100"/>
+                    <Button x:Name="BtnImageVinyl" Content="Importer image" Grid.Column="1" Click="BtnImageVinyl_Click"/>
+                </Grid>
+
                 <Label x:Name="VinError" Content=""></Label>
 
             </StackPanel>
 
-            <Button x:Name="BtnCreateComics" Content="Create comics" Grid.Column="0" Grid.Row="1" Click="BtnCreateComics_Click"/>
-            <Button x:Name="BtnCreateVinyl" Content="Create vinyl" Grid.Column="1" Grid.Row="1" Click="BtnCreateVinyl_Click"/>
+            <Button x:Name="BtnCreateComics" Content="Create comics" Grid.Row="1" Click="BtnCreateComics_Click" Visibility="Hidden"/>
+            <Button x:Name="BtnCreateVinyl" Content="Create vinyl" Grid.Row="1" Click="BtnCreateVinyl_Click" Visibility="Hidden"/>
 
         </Grid>
         
