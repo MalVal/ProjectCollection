@@ -1,0 +1,307 @@
+﻿<Window x:Class="ProjectCollectionWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectCollectionWpfApp"
+        mc:Ignorable="d"
+        Title="ProjectCollection" MinHeight="500" MinWidth="800" Closing="Window_Closing">
+
+    <DockPanel>
+
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="_Open" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="MenuItem_Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Save">
+                <MenuItem Header="_Save comics" Click="MenuItem_SaveComics_Click" />
+                <MenuItem Header="_Save vinyls" Click="MenuItem_SaveVinyls_Click" />
+            </MenuItem>
+            <MenuItem Header="_Reset">
+                <MenuItem Header="_Reset comics" Click="MenuItem_ResetComics_Click"/>
+                <MenuItem Header="_Reset vinyls" Click="MenuItem_ResetVinyls_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Background="#FF28FF14" DockPanel.Dock="Left">
+
+            <Label Content="Search by name :"></Label>
+            <TextBox/>
+            <Button Content="Search"/>
+
+            <Label Content="Order by :"></Label>
+            <RadioButton Content="Name ascending" GroupName="Order"/>
+            <RadioButton Content="Name descending" GroupName="Order"/>
+            <RadioButton Content="Price ascending" GroupName="Order"/>
+            <RadioButton Content="Price descending" GroupName="Order"/>
+            <RadioButton Content="Date added ascending" GroupName="Order"/>
+            <RadioButton Content="Date added descending" GroupName="Order"/>
+
+            <Label Content="Type :"></Label>
+            <RadioButton Content="All" GroupName="Element" Checked="RadioButtonElement_Checked"/>
+            <RadioButton Content="Vinyls" GroupName="Element" Checked="RadioButtonElement_Checked"/>
+            <RadioButton Content="Comics" GroupName="Element" Checked="RadioButtonElement_Checked"/>
+
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid x:Name="dataGridElements" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding CurrentElement}"  IsReadOnly="True" AutoGenerateColumns="True" Grid.Column="0" Visibility="Hidden" SelectionChanged="dataGridElements_SelectionChanged">
+                    <DataGrid.Resources>
+                        <local:ElementToColorConverter x:Key="ElementToColorConverter" />
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="{Binding Converter={StaticResource ElementToColorConverter}}" />
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
+
+                <DataGrid x:Name="dataGridComics" ItemsSource="{Binding ComicsList}" SelectedItem="{Binding CurrentComics}"  IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.Column="0" Visibility="Hidden" SelectionChanged="dataGridComics_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Isbn" Binding="{Binding Isbn, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Autor" Binding="{Binding Autor, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Topic" Binding="{Binding Topic, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Date added" Binding="{Binding DateAdded, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <DataGrid x:Name="dataGridVinyls" ItemsSource="{Binding VinylList}" SelectedItem="{Binding CurrentVinyl}"  IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="True" AutoGenerateColumns="False" Grid.Column="0" Visibility="Hidden" SelectionChanged="dataGridVinyls_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Label" Binding="{Binding Label, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Genre" Binding="{Binding Genre, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Country" Binding="{Binding Country, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Composer" Binding="{Binding Composer, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Date added" Binding="{Binding DateAdded, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowsPreview="True" Width="5"/>
+
+                <Grid x:Name="GridComics" Grid.Column="2" Visibility="Hidden">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="{Binding CurrentComics.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
+
+                    <StackPanel Grid.Row="1">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Isbn :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentComics.Isbn, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Name :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentComics.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Autor :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentComics.Autor, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Topic :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentComics.Topic, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Price :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentComics.Price, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Date :" Grid.Column="0"></Label>
+                            <DatePicker SelectedDate="{Binding CurrentComics.Date, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Button x:Name="BtnImageComics" Content="Importer image" Click="BtnImageComics_Click"/>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid x:Name="GridVinyls" Grid.Column="2" Visibility="Hidden">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="{Binding CurrentVinyl.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
+
+                    <StackPanel Grid.Row="1">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Label :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Label, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Name :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Genre :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Genre, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Country :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Country, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Composer :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Composer, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Price :" Grid.Column="0"></Label>
+                            <TextBox Text="{Binding CurrentVinyl.Price, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Date :" Grid.Column="0"></Label>
+                            <DatePicker SelectedDate="{Binding CurrentVinyl.Date, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+
+                        </Grid>
+
+                        <Grid>
+
+                            <Button x:Name="BtnImageVinyl" Content="Importer image" Click="BtnImageVinyl_Click"/>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+
+            <Button DockPanel.Dock="Bottom" x:Name="BtnCreateElement" Content="Create elements" Grid.Column="0" Grid.Row="1" Click="BtnCreateElement_Click"/>
+
+        </Grid>
+
+    </DockPanel>
+
+</Window>
