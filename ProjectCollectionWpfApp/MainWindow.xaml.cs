@@ -64,15 +64,13 @@ namespace ProjectCollectionWpfApp
         private void WindowCreateElement_ComicsCreated(object sender, ComicsCreatedEventArgs e)
         {
             Comics newComics = new Comics(e.ComicBook.Name, e.ComicBook.Price, e.ComicBook.Date, e.ComicBook.Image, e.ComicBook.Isbn, e.ComicBook.Autor, e.ComicBook.Topic);
-            DataList.ComicsList.Add(newComics);
-            DataList.ElementsList.Add(newComics);
+            DataList.AddComics(newComics);
         }
 
         private void WindowCreateElement_VinylCreated(object sender, VinylCreatedEventArgs e)
         {
             Vinyl newVinyl = new Vinyl(e.Vinyl.Name, e.Vinyl.Price, e.Vinyl.Date, e.Vinyl.Image, e.Vinyl.Genre, e.Vinyl.Label, e.Vinyl.Country, e.Vinyl.Composer);
-            DataList.VinylList.Add(newVinyl);
-            DataList.ElementsList.Add(newVinyl);
+            DataList.AddVinyl(newVinyl);
         }
         #endregion
 
@@ -98,6 +96,18 @@ namespace ProjectCollectionWpfApp
                 if (DataList.CurrentVinyl != null)
                     DataList.CurrentVinyl.Image = openFileDialog.FileName;
             }
+        }
+
+        private void BtnDeleteComics_Click(object sender, RoutedEventArgs e)
+        {
+            DataList.DeleteComics(DataList.CurrentComics);
+            DataList.CurrentComics = null;
+        }
+
+        private void BtnDeleteVinyl_Click(object sender, RoutedEventArgs e)
+        {
+            DataList.DeleteVinyls(DataList.CurrentVinyl);
+            DataList.CurrentVinyl = null;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -215,6 +225,11 @@ namespace ProjectCollectionWpfApp
         #endregion
 
         #region Event Menu
+
+        private void MenuItem_Options_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
         {

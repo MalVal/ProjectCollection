@@ -11,8 +11,7 @@
 
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" />
-                <MenuItem Header="_Open" />
+                <MenuItem Header="_Options" Click="MenuItem_Options_Click"/>
                 <Separator />
                 <MenuItem Header="_Exit" Click="MenuItem_Exit_Click"/>
             </MenuItem>
@@ -36,7 +35,7 @@
             </MenuItem>
         </Menu>
 
-        <StackPanel Background="#FF28FF14" DockPanel.Dock="Left">
+        <WrapPanel Orientation="Vertical" Background="#FF28FF14" DockPanel.Dock="Left">
 
             <Label Content="Search by name :"></Label>
             <TextBox/>
@@ -55,7 +54,7 @@
             <RadioButton Content="Vinyls" GroupName="Element" Checked="RadioButtonElement_Checked"/>
             <RadioButton Content="Comics" GroupName="Element" Checked="RadioButtonElement_Checked"/>
 
-        </StackPanel>
+        </WrapPanel>
 
         <Grid Grid.Column="1">
 
@@ -117,7 +116,7 @@
 
                     <Image Source="{Binding CurrentComics.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
 
-                    <StackPanel Grid.Row="1">
+                    <WrapPanel Orientation="Vertical" Grid.Row="1">
 
                         <Grid>
 
@@ -193,11 +192,17 @@
 
                         <Grid>
 
-                            <Button x:Name="BtnImageComics" Content="Importer image" Click="BtnImageComics_Click"/>
+                            <Button x:Name="BtnImageComics" Content="Import image" Click="BtnImageComics_Click"/>
 
                         </Grid>
 
-                    </StackPanel>
+                        <Grid>
+
+                            <Button x:Name="BtnDeleteComics" Content="Delete" Click="BtnDeleteComics_Click"/>
+
+                        </Grid>
+
+                    </WrapPanel>
 
                 </Grid>
 
@@ -210,7 +215,7 @@
 
                     <Image Source="{Binding CurrentVinyl.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
 
-                    <StackPanel Grid.Row="1">
+                    <WrapPanel Orientation="Vertical" Grid.Row="1">
 
                         <Grid>
 
@@ -298,11 +303,17 @@
 
                         <Grid>
 
-                            <Button x:Name="BtnImageVinyl" Content="Importer image" Click="BtnImageVinyl_Click"/>
+                            <Button x:Name="BtnImageVinyl" Content="Import image" Click="BtnImageVinyl_Click"/>
 
                         </Grid>
 
-                    </StackPanel>
+                        <Grid>
+
+                            <Button x:Name="BtnDeleteVinyl" Content="Delete" Click="BtnDeleteVinyl_Click"/>
+
+                        </Grid>
+
+                    </WrapPanel>
 
                 </Grid>
 

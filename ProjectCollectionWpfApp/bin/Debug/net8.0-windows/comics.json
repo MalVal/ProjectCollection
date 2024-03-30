@@ -3,14 +3,14 @@
   "$values": [
     {
       "$id": "2",
-      "Isbn": "zaasszd1232s",
-      "Autor": "John Ostrander",
-      "Topic": "Star Wars Legend",
-      "Name": "Star Wars Legacy : An\u00E9anti",
-      "DateAdded": "2024-03-28T18:23:40.7966743+01:00",
-      "Price": 4,
-      "Date": "2007-07-12T00:00:00",
-      "Image": "file:///C:/Users/ironv/OneDrive/Images/Saved Pictures/UntitledDiagram.png"
+      "Isbn": "A15PSzn",
+      "Autor": "Bob Mathieu",
+      "Topic": "Star Wars",
+      "Name": "Legacy",
+      "DateAdded": "2024-03-30T22:09:53.1923615+01:00",
+      "Price": 12,
+      "Date": null,
+      "Image": "C:\\Users\\ironv\\OneDrive\\Images\\Saved Pictures\\Un-cable-ethernet-RJ45-317641.jpg"
     }
   ]
 }

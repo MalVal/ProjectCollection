@@ -25,7 +25,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Background="BurlyWood" x:Name="SPcomics" Visibility="Hidden">
+            <WrapPanel Orientation="Vertical" Grid.Row="0" Background="BurlyWood" x:Name="SPcomics" Visibility="Hidden">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -94,14 +94,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="ComImage" Width="100" Height="100"/>
-                    <Button x:Name="BtnImageComics" Content="Importer image" Grid.Column="1" Click="BtnImageComics_Click"/>
+                    <Button x:Name="BtnImageComics" Content="Import image" Grid.Column="1" Click="BtnImageComics_Click"/>
                 </Grid>
 
                 <Label x:Name="ComError" Content=""></Label>
 
-            </StackPanel>
+            </WrapPanel>
 
-            <StackPanel Grid.Row="0" Background="Aquamarine" x:Name="SPvinyls" Visibility="Hidden">
+            <WrapPanel Orientation="Vertical" Grid.Row="0" Background="Aquamarine" x:Name="SPvinyls" Visibility="Hidden">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -180,12 +180,12 @@
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="VinImage" Width="100" Height="100"/>
-                    <Button x:Name="BtnImageVinyl" Content="Importer image" Grid.Column="1" Click="BtnImageVinyl_Click"/>
+                    <Button x:Name="BtnImageVinyl" Content="Import image" Grid.Column="1" Click="BtnImageVinyl_Click"/>
                 </Grid>
 
                 <Label x:Name="VinError" Content=""></Label>
 
-            </StackPanel>
+            </WrapPanel>
 
             <Button x:Name="BtnCreateComics" Content="Create comics" Grid.Row="1" Click="BtnCreateComics_Click" Visibility="Hidden"/>
             <Button x:Name="BtnCreateVinyl" Content="Create vinyl" Grid.Row="1" Click="BtnCreateVinyl_Click" Visibility="Hidden"/>

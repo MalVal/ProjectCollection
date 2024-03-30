@@ -128,5 +128,33 @@ namespace ProjectCollectionClassLibrary
             }
         }
         #endregion
+
+        #region Methods
+
+        public void AddComics(Comics comics)
+        {
+            this.ComicsList.Add(comics);
+            this.ElementsList.Add(comics);
+        }
+
+        public void AddVinyl(Vinyl vinyl)
+        {
+            this.VinylList.Add(vinyl);
+            this.ElementsList.Add(vinyl);
+        }
+
+        public void DeleteComics(Comics comics)
+        {
+            this.ComicsList.Remove(comics);
+            this.ElementsList.Remove(comics);
+        }
+
+        public void DeleteVinyls(Vinyl vinyl)
+        {
+            this.VinylList.Remove(vinyl);
+            this.ElementsList.Remove(vinyl);
+        }
+
+        #endregion
     }
 }

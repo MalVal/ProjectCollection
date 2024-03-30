@@ -20,3 +20,4 @@ C:\Users\ironv\Documents\HEPL\B2\c#\Projet_final\ProjectCollection\ProjectCollec
 C:\Users\ironv\Documents\HEPL\B2\c#\Projet_final\ProjectCollection\ProjectCollectionClassLibrary\obj\Debug\net8.0\refint\ProjectCollectionClassLibrary.dll
 C:\Users\ironv\Documents\HEPL\B2\c#\Projet_final\ProjectCollection\ProjectCollectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.pdb
 C:\Users\ironv\Documents\HEPL\B2\c#\Projet_final\ProjectCollection\ProjectCollectionClassLibrary\obj\Debug\net8.0\ref\ProjectCollectionClassLibrary.dll
+C:\Users\ironv\Documents\HEPL\B2\c#\Projet_final\ProjectCollection\ProjectCollectionClassLibrary\obj\Debug\net8.0\ProjectCollectionClassLibrary.sourcelink.json
