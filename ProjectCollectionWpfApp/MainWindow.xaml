@@ -19,10 +19,20 @@
             <MenuItem Header="_Save">
                 <MenuItem Header="_Save comics" Click="MenuItem_SaveComics_Click" />
                 <MenuItem Header="_Save vinyls" Click="MenuItem_SaveVinyls_Click" />
+                <MenuItem Header="_Save all" Click="MenuItem_SaveAll_Click" />
             </MenuItem>
             <MenuItem Header="_Reset">
                 <MenuItem Header="_Reset comics" Click="MenuItem_ResetComics_Click"/>
                 <MenuItem Header="_Reset vinyls" Click="MenuItem_ResetVinyls_Click"/>
+                <MenuItem Header="_Reset all" Click="MenuItem_ResetAll_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Import">
+                <MenuItem Header="_Import a comic book" Click="MenuItem_ImportComicBook_Click"/>
+                <MenuItem Header="_Import a vinyl" Click="MenuItem_ImportVinyl_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Export">
+                <MenuItem Header="_Export the selected comic book" Click="MenuItem_ExportComicBook_Click"/>
+                <MenuItem Header="_Export the selected vinyl" Click="MenuItem_ExportVinyl_Click"/>
             </MenuItem>
         </Menu>
 

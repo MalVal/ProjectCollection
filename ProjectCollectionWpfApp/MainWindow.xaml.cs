@@ -24,6 +24,8 @@ using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Globalization;
+using System.Xml.Serialization;
+using System;
 
 namespace ProjectCollectionWpfApp
 {
@@ -136,6 +138,7 @@ namespace ProjectCollectionWpfApp
                     dataGridComics.Visibility = Visibility.Hidden;
                     GridComics.Visibility = Visibility.Hidden;
                     DataList.CurrentComics = null;
+                    DataList.CurrentElement = null;
                 }
                 else if (optionChoisie == "Comics")
                 {
@@ -144,6 +147,7 @@ namespace ProjectCollectionWpfApp
                     GridVinyls.Visibility = Visibility.Hidden;
                     dataGridComics.Visibility = Visibility.Visible;
                     DataList.CurrentVinyl = null;
+                    DataList.CurrentElement = null;
                 }
                 else if (optionChoisie == "All")
                 {
@@ -156,39 +160,6 @@ namespace ProjectCollectionWpfApp
                     DataList.CurrentVinyl = null;
                 }
             }
-        }
-
-        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void MenuItem_SaveComics_Click(object sender, RoutedEventArgs e)
-        {
-            this.SaveComics();
-        }
-
-        private void MenuItem_SaveVinyls_Click(object sender, RoutedEventArgs e)
-        {
-            this.SaveVinyls();
-        }
-
-        private void MenuItem_ResetComics_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(Element elem in this.DataList.ComicsList)
-            {
-                this.DataList.ElementsList.Remove(elem);
-            }
-            this.DataList.ComicsList.Clear();
-        }
-
-        private void MenuItem_ResetVinyls_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (Element elem in this.DataList.VinylList)
-            {
-                this.DataList.ElementsList.Remove(elem);
-            }
-            this.DataList.VinylList.Clear();
         }
 
         private void dataGridVinyls_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -236,7 +207,79 @@ namespace ProjectCollectionWpfApp
             {
                 GridVinyls.Visibility = Visibility.Hidden;
                 GridComics.Visibility = Visibility.Hidden;
+                DataList.CurrentComics = null;
+                DataList.CurrentVinyl = null;
             }
+        }
+
+        #endregion
+
+        #region Event Menu
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MenuItem_SaveComics_Click(object sender, RoutedEventArgs e)
+        {
+            this.SaveComics();
+
+            MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_SaveVinyls_Click(object sender, RoutedEventArgs e)
+        {
+            this.SaveVinyls();
+
+            MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_SaveAll_Click(object sender, RoutedEventArgs e)
+        {
+            this.SaveComics();
+            this.SaveVinyls();
+
+            MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_ResetComics_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Element elem in this.DataList.ComicsList)
+            {
+                this.DataList.ElementsList.Remove(elem);
+            }
+            this.DataList.ComicsList.Clear();
+
+            MessageBox.Show("Reset successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_ResetVinyls_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Element elem in this.DataList.VinylList)
+            {
+                this.DataList.ElementsList.Remove(elem);
+            }
+            this.DataList.VinylList.Clear();
+
+            MessageBox.Show("Reset successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_ResetAll_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Element elem in this.DataList.ComicsList)
+            {
+                this.DataList.ElementsList.Remove(elem);
+            }
+            this.DataList.ComicsList.Clear();
+
+            foreach (Element elem in this.DataList.VinylList)
+            {
+                this.DataList.ElementsList.Remove(elem);
+            }
+            this.DataList.VinylList.Clear();
+
+            MessageBox.Show("Reset successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #endregion
@@ -292,6 +335,136 @@ namespace ProjectCollectionWpfApp
             foreach (Vinyl vinyl in DataList.VinylList)
             {
                 DataList.ElementsList.Add(vinyl);
+            }
+        }
+
+        #endregion
+
+        #region Import
+
+        private void MenuItem_ImportComicBook_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    StreamReader myReader = new StreamReader(openFileDialog.FileName);
+
+                    XmlSerializer xmlSerializerRead = new XmlSerializer(typeof(Comics));
+
+                    Comics c = (Comics)xmlSerializerRead.Deserialize(myReader)!;
+
+                    DataList.ComicsList.Add(c);
+                    DataList.ElementsList.Add(c);
+
+                    myReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while reading the file : " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void MenuItem_ImportVinyl_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    StreamReader myReader = new StreamReader(openFileDialog.FileName);
+
+                    XmlSerializer xmlSerializerRead = new XmlSerializer(typeof(Vinyl));
+
+                    Vinyl c = (Vinyl)xmlSerializerRead.Deserialize(myReader)!;
+
+                    DataList.VinylList.Add(c);
+                    DataList.ElementsList.Add(c);
+
+                    myReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while reading the file : " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region Export
+
+        private void MenuItem_ExportComicBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataList.CurrentComics != null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+
+                bool? result = saveFileDialog.ShowDialog();
+
+                if (result == true)
+                {
+                    string fileName = saveFileDialog.FileName;
+
+                    if (!fileName.ToLower().EndsWith(".xml"))
+                    {
+                        fileName += ".xml";
+                    }
+
+                    StreamWriter myWriter = new StreamWriter(fileName);
+
+                    XmlSerializer xmlSerializerWrite = new XmlSerializer(typeof(Comics));
+
+                    xmlSerializerWrite.Serialize(myWriter, this.DataList.CurrentComics);
+
+                    myWriter.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must select a comic book!", "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void MenuItem_ExportVinyl_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.DataList.CurrentVinyl != null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Tous les fichiers (*.*)|*.*";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+
+                bool? result = saveFileDialog.ShowDialog();
+
+                if (result == true)
+                {
+                    string fileName = saveFileDialog.FileName;
+
+                    if (!fileName.ToLower().EndsWith(".xml"))
+                    {
+                        fileName += ".xml";
+                    }
+
+                    StreamWriter myWriter = new StreamWriter(fileName);
+
+                    XmlSerializer xmlSerializerWrite = new XmlSerializer(typeof(Vinyl));
+
+                    xmlSerializerWrite.Serialize(myWriter, this.DataList.CurrentVinyl);
+
+                    myWriter.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must select a vinyl!", "Error", MessageBoxButton.OK);
             }
         }
 
