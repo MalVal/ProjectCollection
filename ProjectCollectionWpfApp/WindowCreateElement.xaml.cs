@@ -229,7 +229,7 @@ namespace ProjectCollectionWpfApp
         private void BtnImageVinyl_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
+            openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
             if (openFileDialog.ShowDialog() == true)
             {
                 string imagePath = openFileDialog.FileName;
@@ -240,7 +240,7 @@ namespace ProjectCollectionWpfApp
         private void BtnImageComics_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
+            openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png|Tous les fichiers (*.*)|*.*"; // Filtre pour les images JPG et PNG
             if (openFileDialog.ShowDialog() == true)
             {
                 string imagePath = openFileDialog.FileName;
@@ -250,24 +250,4 @@ namespace ProjectCollectionWpfApp
 
         #endregion
     }
-    public class ComicsCreatedEventArgs : EventArgs
-    {
-        public Comics ComicBook { get; set; }
-
-        public ComicsCreatedEventArgs(string? name, float price, DateTime? date, string? image, string? isbn, string? autor, string? topic)
-        {
-            ComicBook = new Comics(name, price, date, image, isbn, autor, topic);
-        }
-    }
-
-    public class VinylCreatedEventArgs : EventArgs
-    {
-        public Vinyl Vinyl { get; set; }
-
-        public VinylCreatedEventArgs(string? name, float price, DateTime? date, string? image, string? genre, string? label, string? country, string? composer)
-        {
-            Vinyl = new Vinyl(name, price, date, image, genre, label, country, composer);
-        }
-    }
-
 }

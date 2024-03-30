@@ -11,6 +11,17 @@
       "Price": 12,
       "Date": null,
       "Image": "C:\\Users\\ironv\\OneDrive\\Images\\Saved Pictures\\Un-cable-ethernet-RJ45-317641.jpg"
+    },
+    {
+      "$id": "3",
+      "Isbn": null,
+      "Autor": null,
+      "Topic": null,
+      "Name": null,
+      "DateAdded": "2024-03-30T22:32:27.284334+01:00",
+      "Price": 0,
+      "Date": null,
+      "Image": null
     }
   ]
 }

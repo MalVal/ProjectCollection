@@ -79,7 +79,7 @@ namespace ProjectCollectionWpfApp
         private void BtnImageComics_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+            openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
                 if (DataList.CurrentComics != null)
@@ -90,7 +90,7 @@ namespace ProjectCollectionWpfApp
         private void BtnImageVinyl_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Fichiers d'images (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
+            openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
                 if (DataList.CurrentVinyl != null)
@@ -112,7 +112,7 @@ namespace ProjectCollectionWpfApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = MessageBox.Show("Voulez-vous sauvegarder?", "Quitter?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            var result = MessageBox.Show("Do you want to save ?", "Exit ?", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;
@@ -299,9 +299,9 @@ namespace ProjectCollectionWpfApp
 
         #endregion
 
-        #region Save + Load
+        #region Save
 
-        private void SaveComics()
+        private void SaveComics(string path = ".\\comics.json")
         {
             JsonSerializerOptions options = new()
             {
@@ -309,10 +309,10 @@ namespace ProjectCollectionWpfApp
                 WriteIndented = true
             };
 
-            File.WriteAllText(".\\comics.json", JsonSerializer.Serialize(DataList.ComicsList, options));
+            File.WriteAllText(path, JsonSerializer.Serialize(DataList.ComicsList, options));
         }
 
-        private void SaveVinyls()
+        private void SaveVinyls(string path = ".\\vinyls.json")
         {
             JsonSerializerOptions options = new()
             {
@@ -320,10 +320,14 @@ namespace ProjectCollectionWpfApp
                 WriteIndented = true
             };
 
-            File.WriteAllText(".\\vinyls.json", JsonSerializer.Serialize(DataList.VinylList, options));
+            File.WriteAllText(path, JsonSerializer.Serialize(DataList.VinylList, options));
         }
 
-        private void LoadComics()
+        #endregion
+
+        #region Load
+
+        private void LoadComics(string path = ".\\comics.json")
         {
             JsonSerializerOptions options = new()
             {
@@ -331,14 +335,14 @@ namespace ProjectCollectionWpfApp
                 WriteIndented = true
             };
 
-            DataList.ComicsList = JsonSerializer.Deserialize<ObservableCollection<Comics>>(File.ReadAllText(".\\comics.json"), options)!;
+            DataList.ComicsList = JsonSerializer.Deserialize<ObservableCollection<Comics>>(File.ReadAllText(path), options)!;
             foreach (Comics comics in DataList.ComicsList)
             {
                 DataList.ElementsList.Add(comics);
             }
         }
 
-        private void LoadVinyls()
+        private void LoadVinyls(string path = ".\\vinyls.json")
         {
             JsonSerializerOptions options = new()
             {
@@ -346,7 +350,7 @@ namespace ProjectCollectionWpfApp
                 WriteIndented = true
             };
 
-            DataList.VinylList = JsonSerializer.Deserialize<ObservableCollection<Vinyl>>(File.ReadAllText(".\\vinyls.json"), options)!;
+            DataList.VinylList = JsonSerializer.Deserialize<ObservableCollection<Vinyl>>(File.ReadAllText(path), options)!;
             foreach (Vinyl vinyl in DataList.VinylList)
             {
                 DataList.ElementsList.Add(vinyl);

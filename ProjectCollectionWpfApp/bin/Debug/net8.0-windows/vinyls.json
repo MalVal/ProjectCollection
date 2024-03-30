@@ -9,9 +9,21 @@
       "Composer": "Queen",
       "Name": "A Night At The Opera",
       "DateAdded": "2024-03-30T21:25:30.7905964+01:00",
-      "Price": 3499,
+      "Price": 34.99,
       "Date": null,
       "Image": "C:\\Users\\ironv\\OneDrive\\Images\\Saved Pictures\\0_p31sXcGBPlVNYps8.png"
+    },
+    {
+      "$id": "3",
+      "Genre": null,
+      "Label": null,
+      "Country": null,
+      "Composer": null,
+      "Name": null,
+      "DateAdded": "2024-03-30T22:23:12.9981937+01:00",
+      "Price": 12.2,
+      "Date": null,
+      "Image": null
     }
   ]
 }
