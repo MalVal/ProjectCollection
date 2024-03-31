@@ -35,7 +35,7 @@
             </MenuItem>
         </Menu>
 
-        <WrapPanel Orientation="Vertical" Background="#FF28FF14" DockPanel.Dock="Left">
+        <WrapPanel x:Name="LeftBox" Orientation="Vertical" DockPanel.Dock="Left">
 
             <Label Content="Search by name :"></Label>
             <TextBox/>

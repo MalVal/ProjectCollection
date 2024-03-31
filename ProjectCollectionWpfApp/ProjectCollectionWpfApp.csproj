@@ -12,4 +12,8 @@
     <ProjectReference Include="..\ProjectCollectionClassLibrary\ProjectCollectionClassLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+  </ItemGroup>
+
 </Project>

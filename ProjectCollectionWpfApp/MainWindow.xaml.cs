@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Xml.Serialization;
 using System;
+using System.Windows.Media.Animation;
 
 namespace ProjectCollectionWpfApp
 {
@@ -37,6 +38,8 @@ namespace ProjectCollectionWpfApp
         #region Variables and properties
         private DataList DataList { get; set; }
 
+        private Color ColorBackground { get; set; }
+
         #endregion
 
         #region Constructor
@@ -46,6 +49,37 @@ namespace ProjectCollectionWpfApp
             InitializeComponent();
             DataList = new DataList();
             DataContext = DataList;
+
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\ProjectCollection")!;
+            if (registryKey != null)
+            {
+                int RGBvalue = (int)registryKey.GetValue("color", 0);
+
+                registryKey.Close();
+
+                byte r = (byte)((RGBvalue & 0xFF0000) >> 16);
+                byte g = (byte)((RGBvalue & 0x00FF00) >> 8);
+                byte b = (byte)(RGBvalue & 0x0000FF);
+
+                ColorBackground = Color.FromRgb(r, g, b);
+            }
+            else
+            {
+                registryKey = Registry.CurrentUser.CreateSubKey("SOFTWARE\\ProjectCollection");
+
+                if (registryKey != null)
+                {
+                    Color color = Colors.Aqua;
+                    int RGBvalue = color.R << 16 | color.G << 8 | color.B;
+
+                    registryKey.SetValue("color", RGBvalue);
+
+                    registryKey.Close();
+
+                    ColorBackground = color;
+                }
+            }
+            LeftBox.Background = new SolidColorBrush(ColorBackground);
 
             if (File.Exists(".\\comics.json"))
             {
@@ -71,6 +105,19 @@ namespace ProjectCollectionWpfApp
         {
             Vinyl newVinyl = new Vinyl(e.Vinyl.Name, e.Vinyl.Price, e.Vinyl.Date, e.Vinyl.Image, e.Vinyl.Genre, e.Vinyl.Label, e.Vinyl.Country, e.Vinyl.Composer);
             DataList.AddVinyl(newVinyl);
+        }
+
+        private void WindowOption_OptionChanged(OptionChangedEventArgs options)
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\ProjectCollection", true)!;
+            if (registryKey != null)
+            {
+                int RGBvalue = options.Color.R << 16 | options.Color.G << 8 | options.Color.B;
+                registryKey.SetValue("color", RGBvalue);
+                registryKey.Close();
+                ColorBackground = options.Color;
+                LeftBox.Background = new SolidColorBrush(ColorBackground);
+            }
         }
         #endregion
 
@@ -228,7 +275,9 @@ namespace ProjectCollectionWpfApp
 
         private void MenuItem_Options_Click(object sender, RoutedEventArgs e)
         {
-
+            WindowOptions windowOptions = new WindowOptions();
+            windowOptions.OptionChanged += WindowOption_OptionChanged;
+            windowOptions.ShowDialog();
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)

@@ -10,12 +10,18 @@
     <Compile Update="WindowCreateElement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="WindowOptions.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="WindowCreateElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowOptions.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
