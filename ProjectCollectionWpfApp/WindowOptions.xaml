@@ -23,11 +23,11 @@
         <Label Content="Color : " Grid.Row="0" Grid.Column="0"></Label>
         <xctk:ColorPicker x:Name="colorPicker" DisplayColorAndName="True" SelectedColorChanged="ColorPicker_SelectedColorChanged" Grid.Row="0" Grid.Column="1"/>
 
-        <Label Content="Comics path : " Grid.Row="1" Grid.Column="0"/>
-        <Button Content="Change path" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="{Binding ComicsPathL}" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="ComicsPath" Content="Change path" Grid.Row="1" Grid.Column="1" Click="ComicsPath_Click"/>
 
-        <Label Content="Vinyl path : " Grid.Row="2" Grid.Column="0"/>
-        <Button Content="Change path" Grid.Row="2" Grid.Column="1"/>
+        <Label Content="{Binding VinylPathL}" Grid.Row="2" Grid.Column="0"/>
+        <Button x:Name="VinylPath" Content="Change path" Grid.Row="2" Grid.Column="1" Click="VinylPath_Click"/>
 
     </Grid>
 </Window>

@@ -22,6 +22,17 @@
       "Price": 0,
       "Date": null,
       "Image": null
+    },
+    {
+      "$id": "4",
+      "Isbn": "zd",
+      "Autor": "azz",
+      "Topic": "zae",
+      "Name": "zdza",
+      "DateAdded": "2024-04-01T12:49:58.4060892+02:00",
+      "Price": 12.45,
+      "Date": null,
+      "Image": "file:///C:/Users/ironv/OneDrive/Images/Saved Pictures/0_p31sXcGBPlVNYps8.png"
     }
   ]
 }

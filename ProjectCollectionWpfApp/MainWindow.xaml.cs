@@ -54,6 +54,8 @@ namespace ProjectCollectionWpfApp
             if (registryKey != null)
             {
                 int RGBvalue = (int)registryKey.GetValue("color", 0);
+                DataList.ComicsPath = (string)registryKey.GetValue("comicsPath", 0);
+                DataList.VinylPath = (string)registryKey.GetValue("vinylPath", 0);
 
                 registryKey.Close();
 
@@ -73,22 +75,26 @@ namespace ProjectCollectionWpfApp
                     int RGBvalue = color.R << 16 | color.G << 8 | color.B;
 
                     registryKey.SetValue("color", RGBvalue);
+                    registryKey.SetValue("comicsPath", ".\\comics.json");
+                    registryKey.SetValue("vinylPath", ".\\vinyls.json");
 
                     registryKey.Close();
 
                     ColorBackground = color;
+                    DataList.ComicsPath = ".\\comics.json";
+                    DataList.VinylPath = ".\\vinyls.json";
                 }
             }
             LeftBox.Background = new SolidColorBrush(ColorBackground);
 
-            if (File.Exists(".\\comics.json"))
+            if (File.Exists(DataList.ComicsPath))
             {
-                this.LoadComics();
+                this.LoadComics(DataList.ComicsPath);
             }
 
-            if (File.Exists(".\\vinyls.json"))
+            if (File.Exists(DataList.VinylPath))
             {
-                this.LoadVinyls();
+                this.LoadVinyls(DataList.VinylPath);
             }
         }
 
@@ -112,11 +118,28 @@ namespace ProjectCollectionWpfApp
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\ProjectCollection", true)!;
             if (registryKey != null)
             {
-                int RGBvalue = options.Color.R << 16 | options.Color.G << 8 | options.Color.B;
-                registryKey.SetValue("color", RGBvalue);
+                if(options.Color.HasValue)
+                {
+                    Color color = options.Color.Value;
+                    int RGBvalue = color.R << 16 | color.G << 8 | color.B;
+                    registryKey.SetValue("color", RGBvalue);
+                    ColorBackground = color;
+                    LeftBox.Background = new SolidColorBrush(ColorBackground);
+                }
+
+                if(options.ComicsPath != null)
+                {
+                    registryKey.SetValue("comicsPath", options.ComicsPath);
+                    DataList.ComicsPath = options.ComicsPath;
+                }
+
+                if(options.VinylPath != null)
+                {
+                    registryKey.SetValue("vinylPath", options.VinylPath);
+                    DataList.VinylPath = options.VinylPath;
+                }
+
                 registryKey.Close();
-                ColorBackground = options.Color;
-                LeftBox.Background = new SolidColorBrush(ColorBackground);
             }
         }
         #endregion
@@ -166,8 +189,8 @@ namespace ProjectCollectionWpfApp
             }
             else if (result == MessageBoxResult.Yes)
             {
-                this.SaveComics();
-                this.SaveVinyls();
+                this.SaveComics(DataList.ComicsPath);
+                this.SaveVinyls(DataList.VinylPath);
             }
         }
 
@@ -287,22 +310,22 @@ namespace ProjectCollectionWpfApp
 
         private void MenuItem_SaveComics_Click(object sender, RoutedEventArgs e)
         {
-            this.SaveComics();
+            this.SaveComics(DataList.ComicsPath);
 
             MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void MenuItem_SaveVinyls_Click(object sender, RoutedEventArgs e)
         {
-            this.SaveVinyls();
+            this.SaveVinyls(DataList.VinylPath);
 
             MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void MenuItem_SaveAll_Click(object sender, RoutedEventArgs e)
         {
-            this.SaveComics();
-            this.SaveVinyls();
+            this.SaveComics(DataList.ComicsPath);
+            this.SaveVinyls(DataList.VinylPath);
 
             MessageBox.Show("Save successful", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -350,7 +373,7 @@ namespace ProjectCollectionWpfApp
 
         #region Save
 
-        private void SaveComics(string path = ".\\comics.json")
+        private void SaveComics(string path)
         {
             JsonSerializerOptions options = new()
             {
@@ -361,7 +384,7 @@ namespace ProjectCollectionWpfApp
             File.WriteAllText(path, JsonSerializer.Serialize(DataList.ComicsList, options));
         }
 
-        private void SaveVinyls(string path = ".\\vinyls.json")
+        private void SaveVinyls(string path)
         {
             JsonSerializerOptions options = new()
             {

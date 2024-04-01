@@ -75,6 +75,15 @@ namespace ProjectCollectionClassLibrary
                 }
             }
         }
+
+        private string _comicsPath;
+
+        public string ComicsPath
+        {
+            get { return _comicsPath; }
+            set { _comicsPath = value; }
+        }
+
         #endregion
 
         #region Vinyls
@@ -106,6 +115,14 @@ namespace ProjectCollectionClassLibrary
                     NotifyPropertyChanged();
                 }
             }
+        }
+
+        private string _vinylPath;
+
+        public string VinylPath
+        {
+            get { return _vinylPath; }
+            set { _vinylPath = value; }
         }
         #endregion
 
