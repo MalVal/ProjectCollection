@@ -253,7 +253,7 @@ namespace ProjectCollectionWpfApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjectCollectionWpfApp;component/windowcreateelement.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjectCollectionWpfApp;V1.0.0.0;component/windowcreateelement.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\WindowCreateElement.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

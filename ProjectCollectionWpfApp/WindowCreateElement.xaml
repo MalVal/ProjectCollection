@@ -64,7 +64,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Date (YYYY-MM-DD) :" Grid.Column="0"></Label>
+                    <Label Content="Date :" Grid.Column="0"></Label>
                     <DatePicker x:Name="ComDate" Grid.Column="1"/>
                 </Grid>
 
@@ -152,7 +152,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Date (YYYY-MM-DD) :" Grid.Column="0"></Label>
+                    <Label Content="Date :" Grid.Column="0"></Label>
                     <DatePicker x:Name="VinDate" Grid.Column="1"/>
                 </Grid>
 
