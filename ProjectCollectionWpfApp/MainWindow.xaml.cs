@@ -242,6 +242,40 @@ namespace ProjectCollectionWpfApp
             }
         }
 
+        private void RadioButtonOrder_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton radioButtonElement = sender as RadioButton;
+
+            if (radioButtonElement.IsChecked == true)
+            {
+                string optionChoisie = radioButtonElement.Content.ToString();
+                if(optionChoisie == "Name ascending")
+                {
+                    DataList.OrderList(1);
+                }
+                else if(optionChoisie == "Name descending")
+                {
+                    DataList.OrderList(2);
+                }
+                else if(optionChoisie == "Price ascending")
+                {
+                    DataList.OrderList(3);
+                }
+                else if(optionChoisie == "Price descending")
+                {
+                    DataList.OrderList(4);
+                }
+                else if(optionChoisie == "Date added ascending")
+                {
+                    DataList.OrderList(5);
+                }
+                else if(optionChoisie == "Date added descending")
+                {
+                    DataList.OrderList(6);
+                }
+            }
+        }
+
         private void dataGridVinyls_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (DataList.CurrentVinyl != null)
@@ -438,7 +472,7 @@ namespace ProjectCollectionWpfApp
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                openFileDialog.Filter = "xml files (*.xml)|*.xml";
                 if (openFileDialog.ShowDialog() == true)
                 {
                     StreamReader myReader = new StreamReader(openFileDialog.FileName);
@@ -464,7 +498,7 @@ namespace ProjectCollectionWpfApp
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                openFileDialog.Filter = "xml files (*.xml)|*.xml";
                 if (openFileDialog.ShowDialog() == true)
                 {
                     StreamReader myReader = new StreamReader(openFileDialog.FileName);
@@ -485,6 +519,64 @@ namespace ProjectCollectionWpfApp
             }
         }
 
+        private void MenuItem_ImportListComics_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "json files (*.json)|*.json";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string filename = openFileDialog.FileName;
+                    JsonSerializerOptions options = new()
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        WriteIndented = true
+                    };
+
+                    ObservableCollection<Comics> list = JsonSerializer.Deserialize<ObservableCollection<Comics>>(File.ReadAllText(filename), options)!;
+                    foreach (Comics comics in list)
+                    {
+                        DataList.ElementsList.Add(comics);
+                        DataList.ComicsList.Add(comics);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while reading the file : " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void MenuItem_ImportListVinyls_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "json files (*.json)|*.json";
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string filename = openFileDialog.FileName;
+                    JsonSerializerOptions options = new()
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        WriteIndented = true
+                    };
+
+                    ObservableCollection<Vinyl> list = JsonSerializer.Deserialize<ObservableCollection<Vinyl>>(File.ReadAllText(filename), options)!;
+                    foreach (Vinyl vinyl in list)
+                    {
+                        DataList.ElementsList.Add(vinyl);
+                        DataList.VinylList.Add(vinyl);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while reading the file : " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         #endregion
 
         #region Export
@@ -494,7 +586,7 @@ namespace ProjectCollectionWpfApp
             if (this.DataList.CurrentComics != null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Fichiers xml (*.xml)|*.xml";
+                saveFileDialog.Filter = "xml files (*.xml)|*.xml";
                 saveFileDialog.FilterIndex = 1;
                 saveFileDialog.RestoreDirectory = true;
 
@@ -529,7 +621,7 @@ namespace ProjectCollectionWpfApp
             if (this.DataList.CurrentVinyl != null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Tous les fichiers (*.*)|*.*";
+                saveFileDialog.Filter = "xml files (*.xml)|*.xml";
                 saveFileDialog.FilterIndex = 1;
                 saveFileDialog.RestoreDirectory = true;
 
@@ -556,6 +648,60 @@ namespace ProjectCollectionWpfApp
             else
             {
                 MessageBox.Show("You must select a vinyl!", "Error", MessageBoxButton.OK);
+            }
+        }
+
+        private void MenuItem_ExportAllComics_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "json files (*.json)|*.json";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string fileName = saveFileDialog.FileName;
+
+                if (!fileName.ToLower().EndsWith(".json"))
+                {
+                    fileName += ".json";
+                }
+                JsonSerializerOptions options = new()
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    WriteIndented = true
+                };
+
+                File.WriteAllText(fileName, JsonSerializer.Serialize(DataList.ComicsList, options));
+            }
+        }
+
+        private void MenuItem_ExportAllVinyls_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "json files (*.json)|*.json";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.RestoreDirectory = true;
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string fileName = saveFileDialog.FileName;
+
+                if (!fileName.ToLower().EndsWith(".json"))
+                {
+                    fileName += ".json";
+                }
+                JsonSerializerOptions options = new()
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    WriteIndented = true
+                };
+
+                File.WriteAllText(fileName, JsonSerializer.Serialize(DataList.VinylList, options));
             }
         }
 

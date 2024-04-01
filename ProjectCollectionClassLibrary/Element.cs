@@ -6,9 +6,9 @@ namespace ProjectCollectionClassLibrary
     {
         #region Variables & properties
 
-        private String? _name;
+        private String _name;
 
-        public String? Name
+        public String Name
         {
             get { return _name; }
             set { _name = value; }
@@ -38,9 +38,9 @@ namespace ProjectCollectionClassLibrary
             set { _date = value; }
         }
 
-        private String? _image;
+        private String _image;
 
-        public String? Image
+        public String Image
         {
             get { return _image; }
             set
@@ -53,7 +53,7 @@ namespace ProjectCollectionClassLibrary
 
         #region Constructors
 
-        public Element(String? name, float price, DateTime? date, string? image)
+        public Element(String name, float price, DateTime? date, string image)
         {
             Name = name;
             DateAdded = DateTime.Now;
@@ -62,7 +62,7 @@ namespace ProjectCollectionClassLibrary
             Image = image;
         }
 
-        public Element() : this(null, 0, null, null)
+        public Element() : this("Unknown", 0, null, "Unknown")
         {
         }
 

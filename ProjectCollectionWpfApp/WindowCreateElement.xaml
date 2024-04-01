@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectCollectionWpfApp"
         mc:Ignorable="d"
-        Title="WindowCreateElement" Height="450" Width="800">
+        Title="ProjectCollection : creating elements" MinHeight="500" MinWidth="400">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -25,19 +25,30 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <WrapPanel Orientation="Vertical" Grid.Row="0" Background="BurlyWood" x:Name="SPcomics" Visibility="Hidden">
+            <Grid Grid.Row="0" Background="BurlyWood" x:Name="SPcomics" Visibility="Hidden">
 
-                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Name :" Grid.Column="0"></Label>
+                    <Label Content="(Obligatory) Name :" Grid.Column="0"></Label>
                     <TextBox x:Name="ComName" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -47,7 +58,7 @@
                     <TextBox x:Name="ComPrice" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -57,7 +68,7 @@
                     <DatePicker x:Name="ComDate" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -67,7 +78,7 @@
                     <TextBox x:Name="ComIsbn" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -77,7 +88,7 @@
                     <TextBox x:Name="ComAutor" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -87,7 +98,7 @@
                     <TextBox x:Name="ComTopic" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -97,23 +108,35 @@
                     <Button x:Name="BtnImageComics" Content="Import image" Grid.Column="1" Click="BtnImageComics_Click"/>
                 </Grid>
 
-                <Label x:Name="ComError" Content=""></Label>
+                <Label Grid.Row="7" x:Name="ComError" Content=""></Label>
 
-            </WrapPanel>
+            </Grid>
 
-            <WrapPanel Orientation="Vertical" Grid.Row="0" Background="Aquamarine" x:Name="SPvinyls" Visibility="Hidden">
+            <Grid Grid.Row="0" Background="Aquamarine" x:Name="SPvinyls" Visibility="Hidden">
 
-                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Name :" Grid.Column="0"></Label>
+                    <Label Content="(Obligatory) Name :" Grid.Column="0"></Label>
                     <TextBox x:Name="VinName" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -123,7 +146,7 @@
                     <TextBox x:Name="VinPrice" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -133,7 +156,7 @@
                     <DatePicker x:Name="VinDate" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -143,7 +166,7 @@
                     <TextBox x:Name="VinGenre" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -153,7 +176,7 @@
                     <TextBox x:Name="VinLabel" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -163,7 +186,7 @@
                     <TextBox x:Name="VinCountry" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -173,7 +196,7 @@
                     <TextBox x:Name="VinComposer" Grid.Column="1"/>
                 </Grid>
 
-                <Grid>
+                <Grid Grid.Row="7">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -183,9 +206,9 @@
                     <Button x:Name="BtnImageVinyl" Content="Import image" Grid.Column="1" Click="BtnImageVinyl_Click"/>
                 </Grid>
 
-                <Label x:Name="VinError" Content=""></Label>
+                <Label Grid.Row="8" x:Name="VinError" Content=""></Label>
 
-            </WrapPanel>
+            </Grid>
 
             <Button x:Name="BtnCreateComics" Content="Create comics" Grid.Row="1" Click="BtnCreateComics_Click" Visibility="Hidden"/>
             <Button x:Name="BtnCreateVinyl" Content="Create vinyl" Grid.Row="1" Click="BtnCreateVinyl_Click" Visibility="Hidden"/>

@@ -11,25 +11,25 @@ namespace ProjectCollectionClassLibrary
     {
         #region Variables and properties
 
-        private String? _isbn;
+        private String _isbn;
 
-        public String? Isbn
+        public String Isbn
         {
             get { return _isbn; }
             set { _isbn = value; }
         }
 
-        private String? _autor;
+        private String _autor;
 
-        public String? Autor
+        public String Autor
         {
             get { return _autor; }
             set { _autor = value; }
         }
 
-        private String? _topic;
+        private String _topic;
 
-        public String? Topic
+        public String Topic
         {
             get { return _topic; }
             set { _topic = value; }
@@ -39,14 +39,14 @@ namespace ProjectCollectionClassLibrary
 
         #region Constructors
 
-        public Comics(String? name, float price, DateTime? date, String? image, String? isbn, String? autor, String? topic) : base(name, price, date, image)
+        public Comics(String name, float price, DateTime? date, String image, String isbn, String autor, String topic) : base(name, price, date, image)
         {
             Isbn = isbn;
             Autor = autor;
             Topic = topic;
         }
 
-        public Comics() : this(null, 0, null, null, null, null, null)
+        public Comics() : this("Unknown", 0, null, "Unknown", "Unknown", "Unknown", "Unknown")
         {
         }
 

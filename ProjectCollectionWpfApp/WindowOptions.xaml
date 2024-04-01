@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:ProjectCollectionWpfApp"
         mc:Ignorable="d"
-        Title="WindowOptions" Height="200"  Width="400">
+        Title="ProjectCollection : options" MinHeight="200"  MinWidth="400">
     <Grid>
 
         <Grid.RowDefinitions>

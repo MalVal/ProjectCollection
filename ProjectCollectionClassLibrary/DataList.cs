@@ -173,6 +173,70 @@ namespace ProjectCollectionClassLibrary
             this.ElementsList.Remove(vinyl);
         }
 
+        public void OrderList(int choice)
+        {
+            List<Element> listElem = ElementsList.ToList();
+            List<Comics> listComics = ComicsList.ToList();
+            List<Vinyl> listVinyls = VinylList.ToList();
+
+            switch(choice)
+            {
+                case 1:
+                    listElem.Sort(new ElementNameAComparer());
+                    listComics.Sort(new ElementNameAComparer());
+                    listVinyls.Sort(new ElementNameAComparer());
+                    break;
+                case 2:
+                    listElem.Sort(new ElementNameDComparer());
+                    listComics.Sort(new ElementNameDComparer());
+                    listVinyls.Sort(new ElementNameDComparer());
+                    break;
+                case 3:
+                    listElem.Sort(new ElementPriceAComparer());
+                    listComics.Sort(new ElementPriceAComparer());
+                    listVinyls.Sort(new ElementPriceAComparer());
+                    break;
+                case 4:
+                    listElem.Sort(new ElementPriceDComparer());
+                    listComics.Sort(new ElementPriceDComparer());
+                    listVinyls.Sort(new ElementPriceDComparer());
+                    break;
+                case 5:
+                    listElem.Sort(new ElementDateAddedAComparer());
+                    listComics.Sort(new ElementDateAddedAComparer());
+                    listVinyls.Sort(new ElementDateAddedAComparer());
+                    break;
+                case 6:
+                    listElem.Sort(new ElementDateAddedDComparer());
+                    listComics.Sort(new ElementDateAddedDComparer());
+                    listVinyls.Sort(new ElementDateAddedDComparer());
+                    break;
+                default:
+                    listElem.Sort();
+                    listComics.Sort();
+                    listVinyls.Sort();
+                    break;
+            }
+
+            ElementsList.Clear();
+            foreach (var item in listElem)
+            {
+                ElementsList.Add(item);
+            }
+
+            ComicsList.Clear();
+            foreach (var item in listComics)
+            {
+                ComicsList.Add(item);
+            }
+
+            VinylList.Clear();
+            foreach (var item in listVinyls)
+            {
+                VinylList.Add(item);
+            }
+        }
+
         #endregion
     }
 }

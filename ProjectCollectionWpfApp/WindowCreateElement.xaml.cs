@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -76,14 +77,14 @@ namespace ProjectCollectionWpfApp
         private void BtnCreateComics_Click(object sender, RoutedEventArgs e)
         {
             bool error = false;
-            string? name, isbn, autor, topic, image;
+            string name, isbn, autor, topic, image;
             float price;
             DateTime? date = null;
 
             name = ComName.Text;
             if (string.IsNullOrWhiteSpace(name))
             {
-                name = null;
+                error = true;
             }
 
             if (string.IsNullOrWhiteSpace(ComPrice.Text))
@@ -109,7 +110,7 @@ namespace ProjectCollectionWpfApp
 
             if (ComImage.Source == null)
             {
-                image = null;
+                image = "/ProjectCollectionWpfApp;component/Default.jpg";
             }
             else
             {
@@ -119,19 +120,19 @@ namespace ProjectCollectionWpfApp
             isbn = ComIsbn.Text;
             if (string.IsNullOrWhiteSpace(isbn))
             {
-                isbn = null;
+                isbn = "Unknown";
             }
 
             autor = ComAutor.Text;
             if (string.IsNullOrWhiteSpace(autor))
             {
-                autor = null;
+                autor = "Unknown";
             }
 
             topic = ComTopic.Text;
             if (string.IsNullOrWhiteSpace(topic))
             {
-                topic = null;
+                topic = "Unknown";
             }
 
             if (error == false)
@@ -151,14 +152,14 @@ namespace ProjectCollectionWpfApp
         private void BtnCreateVinyl_Click(object sender, RoutedEventArgs e)
         {
             bool error = false;
-            string? name, genre, label, country, composer, image;
+            string name, genre, label, country, composer, image;
             float price;
             DateTime? date = null;
 
             name = VinName.Text;
             if (string.IsNullOrWhiteSpace(name))
             {
-                name = null;
+                error = true;
             }
 
             if (string.IsNullOrWhiteSpace(VinPrice.Text))
@@ -184,7 +185,7 @@ namespace ProjectCollectionWpfApp
 
             if (VinImage.Source == null)
             {
-                image = null;
+                image = "/ProjectCollectionWpfApp;component/Default.jpg";
             }
             else
             {
@@ -194,25 +195,25 @@ namespace ProjectCollectionWpfApp
             genre = VinGenre.Text;
             if (string.IsNullOrWhiteSpace(genre))
             {
-                genre = null;
+                genre = "Unknown";
             }
 
             label = VinLabel.Text;
             if (string.IsNullOrWhiteSpace(label))
             {
-                label = null;
+                label = "Unknown";
             }
 
             country = VinCountry.Text;
             if (string.IsNullOrWhiteSpace(country))
             {
-                country = null;
+                country = "Unknown";
             }
 
             composer = VinComposer.Text;
             if (string.IsNullOrWhiteSpace(composer))
             {
-                composer = null;
+                composer = "Unknown";
             }
 
             if (error == false)

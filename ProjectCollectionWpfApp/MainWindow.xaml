@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectCollectionWpfApp"
         mc:Ignorable="d"
-        Title="ProjectCollection" MinHeight="500" MinWidth="800" Closing="Window_Closing">
+        Title="ProjectCollection" MinHeight="700" MinWidth="700" Closing="Window_Closing">
 
     <DockPanel>
 
@@ -28,26 +28,26 @@
             <MenuItem Header="_Import">
                 <MenuItem Header="_Import a comic book" Click="MenuItem_ImportComicBook_Click"/>
                 <MenuItem Header="_Import a vinyl" Click="MenuItem_ImportVinyl_Click"/>
+                <MenuItem Header="_Import a list of comics" Click="MenuItem_ImportListComics_Click"/>
+                <MenuItem Header="_Import a list of vinyls" Click="MenuItem_ImportListVinyls_Click"/>
             </MenuItem>
             <MenuItem Header="_Export">
                 <MenuItem Header="_Export the selected comic book" Click="MenuItem_ExportComicBook_Click"/>
                 <MenuItem Header="_Export the selected vinyl" Click="MenuItem_ExportVinyl_Click"/>
+                <MenuItem Header="_Export all the comics" Click="MenuItem_ExportAllComics_Click"/>
+                <MenuItem Header="_Export all the vinyls" Click="MenuItem_ExportAllVinyls_Click"/>
             </MenuItem>
         </Menu>
 
         <WrapPanel x:Name="LeftBox" Orientation="Vertical" DockPanel.Dock="Left">
 
-            <Label Content="Search by name :"></Label>
-            <TextBox/>
-            <Button Content="Search"/>
-
             <Label Content="Order by :"></Label>
-            <RadioButton Content="Name ascending" GroupName="Order"/>
-            <RadioButton Content="Name descending" GroupName="Order"/>
-            <RadioButton Content="Price ascending" GroupName="Order"/>
-            <RadioButton Content="Price descending" GroupName="Order"/>
-            <RadioButton Content="Date added ascending" GroupName="Order"/>
-            <RadioButton Content="Date added descending" GroupName="Order"/>
+            <RadioButton Content="Name ascending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
+            <RadioButton Content="Name descending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
+            <RadioButton Content="Price ascending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
+            <RadioButton Content="Price descending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
+            <RadioButton Content="Date added ascending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
+            <RadioButton Content="Date added descending" GroupName="Order" Checked="RadioButtonOrder_Checked"/>
 
             <Label Content="Type :"></Label>
             <RadioButton Content="All" GroupName="Element" Checked="RadioButtonElement_Checked"/>
@@ -68,7 +68,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition MinWidth="150"/>
                 </Grid.ColumnDefinitions>
 
                 <DataGrid x:Name="dataGridElements" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding CurrentElement}"  IsReadOnly="True" AutoGenerateColumns="True" Grid.Column="0" Visibility="Hidden" SelectionChanged="dataGridElements_SelectionChanged">
@@ -116,9 +116,20 @@
 
                     <Image Source="{Binding CurrentComics.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
 
-                    <WrapPanel Orientation="Vertical" Grid.Row="1">
+                    <Grid Grid.Row="1">
 
-                        <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -130,7 +141,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="1">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -142,7 +153,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="2">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -154,7 +165,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="3">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -166,7 +177,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="4">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -178,7 +189,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="5">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -190,19 +201,19 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="6">
 
                             <Button x:Name="BtnImageComics" Content="Import image" Click="BtnImageComics_Click"/>
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="7">
 
                             <Button x:Name="BtnDeleteComics" Content="Delete" Click="BtnDeleteComics_Click"/>
 
                         </Grid>
 
-                    </WrapPanel>
+                    </Grid>
 
                 </Grid>
 
@@ -215,9 +226,20 @@
 
                     <Image Source="{Binding CurrentVinyl.Image, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0"/>
 
-                    <WrapPanel Orientation="Vertical" Grid.Row="1">
+                    <Grid Grid.Row="1">
 
-                        <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -229,7 +251,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="1">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -241,7 +263,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="2">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -253,7 +275,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="3">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -265,7 +287,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="4">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -277,7 +299,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="5">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -289,7 +311,7 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="6">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -301,19 +323,19 @@
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="7">
 
                             <Button x:Name="BtnImageVinyl" Content="Import image" Click="BtnImageVinyl_Click"/>
 
                         </Grid>
 
-                        <Grid>
+                        <Grid Grid.Row="8">
 
                             <Button x:Name="BtnDeleteVinyl" Content="Delete" Click="BtnDeleteVinyl_Click"/>
 
                         </Grid>
 
-                    </WrapPanel>
+                    </Grid>
 
                 </Grid>
 
