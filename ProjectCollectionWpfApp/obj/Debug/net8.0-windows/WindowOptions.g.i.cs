@@ -94,7 +94,7 @@ namespace ProjectCollectionWpfApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProjectCollectionWpfApp;V1.0.0.0;component/windowoptions.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProjectCollectionWpfApp;component/windowoptions.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\WindowOptions.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

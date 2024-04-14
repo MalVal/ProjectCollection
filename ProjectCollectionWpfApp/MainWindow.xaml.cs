@@ -153,7 +153,10 @@ namespace ProjectCollectionWpfApp
             if (openFileDialog.ShowDialog() == true)
             {
                 if (DataList.CurrentComics != null)
+                {
                     DataList.CurrentComics.Image = openFileDialog.FileName;
+                    ImgComics.Source = new BitmapImage(new Uri(DataList.CurrentComics.Image));
+                }
             }
         }
 
@@ -164,7 +167,10 @@ namespace ProjectCollectionWpfApp
             if (openFileDialog.ShowDialog() == true)
             {
                 if (DataList.CurrentVinyl != null)
+                {
                     DataList.CurrentVinyl.Image = openFileDialog.FileName;
+                    ImgVinyl.Source = new BitmapImage(new Uri(DataList.CurrentVinyl.Image));
+                }
             }
         }
 
@@ -280,7 +286,8 @@ namespace ProjectCollectionWpfApp
         {
             if (DataList.CurrentVinyl != null)
             {
-                GridVinyls.Visibility = Visibility.Visible;
+                ImgVinyl.Source = new BitmapImage(new Uri(DataList.CurrentVinyl.Image));
+                GridVinyls.Visibility = Visibility.Visible;;
             }
             else
             {
@@ -292,6 +299,7 @@ namespace ProjectCollectionWpfApp
         {
             if (DataList.CurrentComics != null)
             {
+                ImgComics.Source = new BitmapImage(new Uri(DataList.CurrentComics.Image));
                 GridComics.Visibility = Visibility.Visible;
             }
             else
