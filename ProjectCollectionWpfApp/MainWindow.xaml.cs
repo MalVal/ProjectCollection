@@ -286,7 +286,15 @@ namespace ProjectCollectionWpfApp
         {
             if (DataList.CurrentVinyl != null)
             {
-                ImgVinyl.Source = new BitmapImage(new Uri(DataList.CurrentVinyl.Image));
+                try
+                {
+                    ImgVinyl.Source = new BitmapImage(new Uri(DataList.CurrentVinyl.Image));
+                }
+                catch(Exception)
+                {
+                    DataList.CurrentVinyl.Image = "pack://application:,,,/ProjectCollectionWpfApp;component/default.png";
+                    ImgVinyl.Source = new BitmapImage(new Uri(DataList.CurrentVinyl.Image));
+                }
                 GridVinyls.Visibility = Visibility.Visible;;
             }
             else
@@ -299,7 +307,16 @@ namespace ProjectCollectionWpfApp
         {
             if (DataList.CurrentComics != null)
             {
-                ImgComics.Source = new BitmapImage(new Uri(DataList.CurrentComics.Image));
+                try
+                {
+                    ImgComics.Source = new BitmapImage(new Uri(DataList.CurrentComics.Image));
+                }
+                catch(Exception)
+                {
+                    DataList.CurrentComics.Image = "pack://application:,,,/ProjectCollectionWpfApp;component/default.png";
+                    ImgComics.Source = new BitmapImage(new Uri(DataList.CurrentComics.Image));
+                }
+
                 GridComics.Visibility = Visibility.Visible;
             }
             else

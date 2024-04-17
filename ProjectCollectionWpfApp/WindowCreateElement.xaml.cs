@@ -110,7 +110,7 @@ namespace ProjectCollectionWpfApp
 
             if (ComImage.Source == null)
             {
-                image = "/ProjectCollectionWpfApp;component/Default.jpg";
+                image = "pack://application:,,,/ProjectCollectionWpfApp;component/default.png";
             }
             else
             {
@@ -185,7 +185,7 @@ namespace ProjectCollectionWpfApp
 
             if (VinImage.Source == null)
             {
-                image = "/ProjectCollectionWpfApp;component/Default.jpg";
+                image = "pack://application:,,,/ProjectCollectionWpfApp;component/default.png";
             }
             else
             {

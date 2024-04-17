@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="default.jpg" />
+    <None Remove="default.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="default.jpg" />
+    <Resource Include="default.png" />
   </ItemGroup>
 
 </Project>
